@@ -3,7 +3,7 @@ $(document).ready(function(){
    $('.panels').css('visibility','hidden');
    var map1;
    var point;
-   var places = ["boston,MA","philadelphia,PA"];
+   var places = [];
 
    function initializeMap() {
       var mapOptions = {
@@ -17,11 +17,19 @@ $(document).ready(function(){
    function retrieveTexts() {
       $.post('/retrieveTexts/', function(response) {
           var texts = $.parseJSON(response);
-          $('#news_text').empty();
           for (var text in texts) {
-             $('#news_text').append('<div class="reports">' + texts[text]['fields']['text'] + '</div>');
+             if ($('div[data-id="' + texts[text]['pk'] + '"]').length == 0) {
+                 var date = texts[text]['fields']['date'].substring(0,10);
+                 $('#news_text').append('<div class="reports" data-date="' + date + '" data-id="' + texts[text]['pk'] + '">' + texts[text]['fields']['text'] + '</div>');
+             }
+             var loc = texts[text]['fields']['location'];
+             if ($.inArray(loc,places) < 0) {
+                places.push(loc);
+                plot();
+             }
+             var keywords = texts[text]['fields']['keywords'];
           }
-          setTimeout(5000, retrieveTexts());
+         setTimeout(5000, retrieveTexts());
       });
    }
 
@@ -29,7 +37,8 @@ $(document).ready(function(){
       geocoder = new google.maps.Geocoder();
       for (var i = 0; i<places.length;i++){
         var ad = places[i];
-        geocoder.geocode( { 'address': ad}, function(results, status) {
+        //console.log(ad);
+        geocoder.geocode( {'address': ad}, function(results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
           point = results[0].geometry.location;
           var marker = new google.maps.Marker( {
@@ -37,7 +46,7 @@ $(document).ready(function(){
             position: point,
           });
         } else {
-          alert('Geocode was not successful for the following reason: '+ status);
+          //alert('Geocode for ' + ad + ' was not successful for the following reason: '+ status);
         }
       });
       }

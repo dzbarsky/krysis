@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from TweetProcessor import TweetProcessor
+from TextProcessor import TextProcessor
 import json
 from django.core import serializers
 from app.models import Tweet, Text, Keyword
@@ -15,11 +15,14 @@ def index(request):
 def sms(request):
    body = request.POST['Body']
    sender = request.POST['From']
-   text = Text(text=body, sender=sender)
-   text.save() 
-   tp = TweetProcessor(body)
+   tp = TextProcessor(body)
    words = tp.part_of_speech_tags()
-   for word in words:
+   location = ''
+   for prop in words['proper']:
+      location += prop + " "
+   text = Text(text=body, sender=sender, location=location)
+   text.save() 
+   for word in words['nouns']:
       keyword = Keyword(word=word)
       keyword.save()
       text.keywords.add(keyword) 
