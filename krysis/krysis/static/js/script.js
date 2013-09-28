@@ -23,23 +23,21 @@ $(document).ready(function(){
           for (var text in texts) {
              if ($('div[data-id="' + texts[text]['pk'] + '"]').length == 0) {
                  var date = texts[text]['fields']['date'].substring(0,10);
-                 $('#news_text').append('<div class="reports" data-date="' + date + '" data-id="' + texts[text]['pk'] + '">' + texts[text]['fields']['text'] + '</div>');
+                 $('#news_text').append('<div class="reports" data-date="' + date + '" data-id="2-' + texts[text]['pk'] + '">' + texts[text]['fields']['text'] + '</div>');
              }
              var loc = texts[text]['fields']['location'];
              if ($.inArray(loc,places) < 0) {
                 places.push(loc);
                 plot();
              }
-             var newCloud = false,
-                  existing = [];
+             var existing = [];
              for (var exists in keywords) existing.push(keywords[exists][0]);
              for (var word in words) {
                 if ($.inArray(word,existing) < 0) {
                    keywords.push([word, words[word]]);
-                   newCloud = true;
                 }
              }
-             if (newCloud) generateCloud();
+             generateCloud();
           }
          setTimeout(retrieveTexts, 30000);
       });
