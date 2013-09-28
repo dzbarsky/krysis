@@ -61,4 +61,18 @@ chillest ACD0FD*/
 	visibility: hidden;
 }
 
+.reports{
+	background-color: #fff;
+	opacity:0.6;
+	position:relative;
+	width:400px;
+	margin:10px;
+	padding:10px;
+	text-indent:5px;
+	height:200%;
+	border-radius:5px;
+	font-family:'Montserrat', sans-serif,bold;
+	top:-50px;
+}
+
 

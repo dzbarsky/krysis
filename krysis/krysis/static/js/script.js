@@ -2,6 +2,8 @@ $(document).ready(function(){
 
    $('.panels').css('visibility','hidden');
    var map1;
+   var point;
+   var places = ["boston,MA","philadelphia,PA"];
 
    function initializeMap() {
       var mapOptions = {
@@ -17,15 +19,35 @@ $(document).ready(function(){
           var texts = $.parseJSON(response);
           $('#news_text').empty();
           for (var text in texts) {
-             $('#news_text').append('<div>' + texts[text]['fields']['text'] + '</div>');
+             $('#news_text').append('<div class="reports">' + texts[text]['fields']['text'] + '</div>');
           }
           setTimeout(5000, retrieveTexts());
       });
    }
 
+   function plot() {
+      geocoder = new google.maps.Geocoder();
+      for (var i = 0; i<places.length;i++){
+        var ad = places[i];
+        geocoder.geocode( { 'address': ad}, function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+          point = results[0].geometry.location;
+          var marker = new google.maps.Marker( {
+            map: map1,
+            position: point,
+          });
+        } else {
+          alert('Geocode was not successful for the following reason: '+ status);
+        }
+      });
+      }
+      
+    } //function plot
+
    function initialize() {
       initializeMap();
       retrieveTexts();
+      plot();
    }
 
    initialize();
