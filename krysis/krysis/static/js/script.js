@@ -1,10 +1,21 @@
 $(document).ready(function(){
 
    $('.panels').css('visibility','hidden');
+   
+   // $('#news_text').css('visibility','visible');
    var map1,
         point,
         places = [],
         keywords = [];
+    var dot = {
+    path: google.maps.SymbolPath.CIRCLE,
+    fillOpacity: 0.7,
+    scale: 5,
+    fillColor:'#DC143C',
+    strokeWeight: 5,
+    strokeOpacity:0.5,
+    strokeColor:'#DC143C',
+  };
 
    function initializeMap() {
       var mapOptions = {
@@ -61,6 +72,7 @@ $(document).ready(function(){
           var marker = new google.maps.Marker( {
             map: map1,
             position: point,
+            icon:dot,
           });
         } else {
           //alert('Geocode for ' + ad + ' was not successful for the following reason: '+ status);
@@ -81,7 +93,7 @@ $(document).ready(function(){
    $("#about,#news,#trend,#map").click(function(){
   	$('.panels').children().each(function(){
   		$(this).css('visibility','hidden');
-  	})
+  	});
 
   	$(".tabs").children().each(function(){
   		$(this).css('border-bottom-width','0px');
@@ -106,5 +118,7 @@ $(document).ready(function(){
    $('#news').click(function(){
   	$('#news_text').css('visibility','visible');
    });
-  
+
+   $('#news').trigger("click");
+
 }); //document ready
