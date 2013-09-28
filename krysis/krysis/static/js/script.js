@@ -30,16 +30,18 @@ $(document).ready(function(){
                 places.push(loc);
                 plot();
              }
-             var newCloud = false;
+             var newCloud = false,
+                  existing = [];
+             for (var exists in keywords) existing.push(keywords[exists][0]);
              for (var word in words) {
-                if ($.inArray(word,keywords) < 0) {
+                if ($.inArray(word,existing) < 0) {
                    keywords.push([word, words[word]]);
                    newCloud = true;
                 }
              }
              if (newCloud) generateCloud();
           }
-         setTimeout(100000, retrieveTexts());
+          setTimeout(retrieveTexts, 2000);
       });
    }
 
