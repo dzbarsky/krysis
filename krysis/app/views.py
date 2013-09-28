@@ -28,7 +28,7 @@ def getNewTweets():
       location = ''
       for prop in words['proper']:
         location += prop + " "
-      obj = Text(text=body, sender=tweet.user.name, location=location)
+      obj = Text(text=tweet.text, sender=tweet.user.name, location=location)
       obj.save()
       for word in words['nouns']:
         keyword = Keyword(word=word)
