@@ -11,9 +11,13 @@ def index(request):
    return render(request, 'app/index.html', feed)
 
 def sms(request):
+   print request.POST
+   return HttpResponse()
+
+def call(request):
    if not request.is_ajax():
       print 'not ajax?'
-      return
-   data = request.POST 
+      return HttpResponse()
+   data = request.POST
    print data
    return HttpResponse()
