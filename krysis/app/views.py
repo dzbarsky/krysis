@@ -23,8 +23,17 @@ def getNewTweets():
   existingtweets = [t.text for t in Tweet.objects.all()]
   for tweet in api.GetMentions():
     if not tweet.text in existingtweets:
-      obj = Tweet(text = escape(tweet.text), sender = escape(tweet.user.name))
+      tp = TextProcessor(tweet.text)
+      words = tp.part_of_speech_tags()
+      location = ''
+      for prop in words['proper']:
+        location += prop + " "
+      obj = Text(text=body, sender=tweet.user.name, location=location)
       obj.save()
+      for word in words['nouns']:
+        keyword = Keyword(word=word)
+        keyword.save()
+        obj.keywords.add(keyword)
 
 def index(request):
    getNewTweets()
@@ -43,11 +52,11 @@ def sms(request):
    for prop in words['proper']:
       location += prop + " "
    text = Text(text=body, sender=sender, location=location)
-   text.save() 
+   text.save()
    for word in words['nouns']:
       keyword = Keyword(word=word)
       keyword.save()
-      text.keywords.add(keyword) 
+      text.keywords.add(keyword)
    return HttpResponse()
 
 def call(request):

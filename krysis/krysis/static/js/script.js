@@ -41,7 +41,7 @@ $(document).ready(function(){
              }
              if (newCloud) generateCloud();
           }
-          setTimeout(retrieveTexts, 2000);
+         setTimeout(retrieveTexts, 30000);
       });
    }
 
