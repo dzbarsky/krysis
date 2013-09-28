@@ -4,8 +4,30 @@ from TextProcessor import TextProcessor
 import json
 from django.core import serializers
 from app.models import Tweet, Text, Keyword
+import twitter
+
+def escape(val):
+    return val.replace("'", "\\'")
+
+def getNewTweets():
+  consumer_key='fVHE2OyTytlxzWiSAvk3w'
+  consumer_secret='GwJ6A72AHTIzPpPmHBdVKeEqWrlCxT47xUxLoXaBMWA'
+  access_token_key='1912820988-iKkJ27a0XMUISHUo2GGuMAXEurOzBBisHwFV7l5'
+  access_token_secret='fFKveSq1JpFdnxSNkmEc53IQ7Bk88VXXnT8g5iVfM'
+
+  api = twitter.Api(consumer_key=consumer_key,
+                    consumer_secret=consumer_secret,
+                    access_token_key=access_token_key,
+                    access_token_secret=access_token_secret)
+
+  existingtweets = [t.text for t in Tweet.objects.all()]
+  for tweet in api.GetMentions():
+    if not tweet.text in existingtweets:
+      obj = Tweet(text = escape(tweet.text), sender = escape(tweet.user.name))
+      obj.save()
 
 def index(request):
+   getNewTweets()
    tweets = Tweet.objects.all()
    texts = Text.objects.all()
    feed = { 'tweets' : tweets,
