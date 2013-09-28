@@ -20,4 +20,4 @@ class Text(models.Model):
    date=models.DateTimeField(auto_now_add=True)
 
 class Keyword(models.Model):
-   word=models.CharField(max_length=100)
+   word=models.CharField(max_length=100,unique=True)

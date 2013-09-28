@@ -36,7 +36,7 @@ def getNewTweets():
         obj.keywords.add(keyword)
 
 def index(request):
-   getNewTweets()
+   #getNewTweets()
    tweets = Tweet.objects.all()
    texts = Text.objects.all()
    feed = { 'tweets' : tweets,
