@@ -17,6 +17,17 @@ $(document).ready(function(){
     strokeColor:'#DC143C',
   };
 
+   $('#header').click(function() {
+	
+   	var entries = $('.reports').sort(sorter);
+        $('#news_text').empty().append(entries);
+   });
+
+   function sorter(a,b) {
+      return $(a).data('date') < $(a).data('date') ? 1 : -1;
+   }
+
+
    function initializeMap() {
       var mapOptions = {
          zoom: 2,
@@ -34,7 +45,7 @@ $(document).ready(function(){
           for (var text in texts) {
              if ($('div[data-id="2-' + texts[text]['pk'] + '"]').length == 0) {
                 var date = texts[text]['fields']['date'].substring(0,10);
-                $('#news_text').append('<div class="reports" data-date="' + date + '" data-id="2-' + texts[text]['pk'] + '">' + texts[text]['fields']['text'] + '</div>');
+                $('#news_text').prepend('<div class="reports" data-date="' + date + '" data-id="2-' + texts[text]['pk'] + '">' + texts[text]['fields']['text'] + '</div>');
                 var loc = texts[text]['fields']['location'];
                 if ($.inArray(loc,places) < 0) {
                    places.push(loc);

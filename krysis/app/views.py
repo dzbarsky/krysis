@@ -40,8 +40,8 @@ def index(request):
    #getNewTweets()
    tweets = Tweet.objects.all()
    texts = Text.objects.all()
-   feed = { 'tweets' : tweets,
-            'texts' : texts }
+   feed = { 'tweets' : reversed(tweets),
+            'texts' : reversed(texts) }
    return render(request, 'app/index.html', feed)
 
 def sms(request):
