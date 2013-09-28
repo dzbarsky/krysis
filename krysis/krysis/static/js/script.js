@@ -1,6 +1,8 @@
 $(document).ready(function(){
 
    $('.panels').css('visibility','hidden');
+   
+   // $('#news_text').css('visibility','visible');
    var map1,
         point,
         places = [],
@@ -81,7 +83,7 @@ $(document).ready(function(){
    $("#about,#news,#trend,#map").click(function(){
   	$('.panels').children().each(function(){
   		$(this).css('visibility','hidden');
-  	})
+  	});
 
   	$(".tabs").children().each(function(){
   		$(this).css('border-bottom-width','0px');
@@ -106,5 +108,7 @@ $(document).ready(function(){
    $('#news').click(function(){
   	$('#news_text').css('visibility','visible');
    });
+
+   $('#news').trigger("click");
   
 }); //document ready
