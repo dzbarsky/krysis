@@ -7,6 +7,7 @@
   	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
   	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
   	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+	<script src="static/js/wordcloud2.js"></script>
 
     <!--Google fonts-->
     <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
@@ -36,7 +37,11 @@
     <div class="panels">
     	<div id="about_text"> Open Crisis Monitoring System (OCSM) is an application to assist national peacekeeping forces in tracking and gathering information about situations where intervention is needed. It enables crowdsourcing of information (via SMS, email, phone calls) regarding the location and situation of any political unrest. </div>
     	<div id="news_text"></div>
-    	<div id="trend_text"></div>
+    	<div id="trend_text">
+		<div id="canvas-container">
+        	<canvas id="canvas"></canvas>
+        	</div>
+	</div>
     	<div id="map-canvas"></div>
     </div>
 

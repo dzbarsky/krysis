@@ -75,4 +75,15 @@ chillest ACD0FD*/
 	top:-50px;
 }
 
+#canvas-container {
+	overflow-x: auto;
+	overflow-y: visible;
+	position: relative;
+	margin-top: 20px;
+	margin-bottom: 20px;
+        border: solid 1px black;
+}
 
+#canvas {
+	display: block;
+}

@@ -34,4 +34,15 @@ def call(request):
 def getTexts(request):
    texts = Text.objects.all()
    jsonified = serializers.serialize('json', texts)
-   return HttpResponse(jsonified)
+   words = {}
+   for text in texts:
+       for keyword in text.keywords.all():
+          lc = keyword.word.lower() 
+          if lc in words:
+             words[lc] += 1
+          else:
+             words[lc] = 1
+   wordjson = json.dumps(words)
+   resp = [jsonified, wordjson]
+   toreturn = json.dumps(resp)
+   return HttpResponse(toreturn)
