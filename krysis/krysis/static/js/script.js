@@ -110,5 +110,20 @@ $(document).ready(function(){
    });
 
    $('#news').trigger("click");
-  
+
+var dot = {
+    path: google.maps.SymbolPath.CIRCLE,
+    fillOpacity: 0.7,
+    scale: 5,
+    fillColor:'#DC143C',
+    strokeWeight: 5,
+    strokeOpacity:0.5,
+    strokeColor:'#DC143C',
+  };
+   pt = new google.maps.LatLng(35,38);
+  var marker = new google.maps.Marker( {
+            map: map1,
+            position: pt,
+            icon:dot,
+          });  
 }); //document ready
