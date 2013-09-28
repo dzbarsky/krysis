@@ -1,12 +1,76 @@
-<u>tweets!</u><br>
-{% for tweet in tweets %}
-  {{ tweet.text }}<br>
-  {{ tweet.sender }}<br>
-  {{ tweet.date }}<br><br>
-{% endfor %}
-<u>texts!</u><br>
-{% for text in texts %}
-  {{ text.text }}<br>
-  {{ text.sender }}<br>
-  {{ text.date }}<br><br>
-{% endfor %}
+<!DOCTYPE html>
+<html>
+  <head>
+  	<title>OPEN SOURCE CRISIS MONITORING</title>
+
+  	<!--you need this source tag to do anything with jQuery-->
+  	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+  	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
+    <!--Google fonts-->
+    <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+
+  	<!-- you need this src to include your javascript file-->
+  	<script type="text/javascript" src="static/js/script.js"></script>
+
+    <!-- you need this src to include your css file-->
+  	<link rel="stylesheet" type="text/css" href="static/css/stylesheet.css"/>
+
+  
+  	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=geometry&key=AIzaSyCeGd25WDa3-bo3WdBZLNAY5uB_0EoDvN0&sensor=false"></script>
+
+  </head>
+
+  <body background="static/images/azure.jpg">
+
+  	<div id="header">OPEN SOURCE CRISIS MONITORING</div>
+
+    <!-- <div id="menu" class=".radio">
+    	<input type="radio" name="menubar" id="feed"><label for="feed">Newsfeed</label>
+    	<input type="radio" name="menubar" id="trend"><label for="trend">Trending</label>
+    	<input type="radio" name="menubar" id="map"><label for="map">Map</label>
+    	<input type="radio" name="menubar" id="about"><label for="about">About</label>
+    </div> -->
+
+    
+
+   <!--  <div id="tabs">
+    	<ul>
+    		<li><a href="#tabs-1">About</a></li>
+    		<li><a href="#tabs-2">Newsfeed</a></li>
+    		<li><a href="#tabs-3">Trending</a></li>
+    		<li id="map_tab"><a href="#tabs-4">Map</a></li>
+  		</ul>
+
+  		<div id="tabs-1">
+    		About Open Source Crisis Monitoring
+  		</div>
+  		<div id="tabs-2">
+    		Newsfeed of what's happening
+  		</div>
+  		<div id="tabs-3">
+    		What words are trending in current reports
+  		</div>
+  		<div id="tabs-4">
+    		Map of reports
+    		
+  		</div>
+    </div> -->
+
+    <div class="tabs">
+    	<span id="about">ABOUT</span>
+    	<span id="news">NEWSFEED</span>
+    	<span id="trend">TRENDING</span>
+    	<span id="map">MAP</span>
+    </div>
+
+    <div class="panels">
+    	<div id="about_text"> Open Crisis Monitoring System (OCSM) is an application to assist national peacekeeping forces in tracking and gathering information about situations where intervention is needed. It enables crowdsourcing of information (via SMS, email, phone calls) regarding the location and situation of any political unrest. </div>
+    	<div id="news_text"></div>
+    	<div id="trend_text"></div>
+    	<div id="map-canvas"></div>
+    </div>
+
+  </body>
+</html>

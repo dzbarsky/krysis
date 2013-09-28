@@ -1,7 +1,9 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-
-from app.models import Tweet, Text
+from TweetProcessor import TweetProcessor
+import json
+from django.core import serializers
+from app.models import Tweet, Text, Keyword
 
 def index(request):
    tweets = Tweet.objects.all()
@@ -11,13 +13,22 @@ def index(request):
    return render(request, 'app/index.html', feed)
 
 def sms(request):
-   print request.POST
+   body = request.POST['Body']
+   sender = request.POST['From']
+   text = Text(text=body, sender=sender)
+   text.save() 
+   tp = TweetProcessor(body)
+   words = tp.part_of_speech_tags()
+   for word in words:
+      keyword = Keyword(word=word)
+      keyword.save()
+      text.keywords.add(keyword) 
    return HttpResponse()
 
 def call(request):
-   if not request.is_ajax():
-      print 'not ajax?'
-      return HttpResponse()
-   data = request.POST
-   print data
    return HttpResponse()
+
+def getTexts(request):
+   texts = Text.objects.all()
+   jsonified = serializers.serialize('json', texts)
+   return HttpResponse(jsonified)
