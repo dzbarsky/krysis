@@ -5,6 +5,7 @@ import json
 from django.core import serializers
 from app.models import Tweet, Text, Keyword
 import twitter
+from twilio.rest import TwilioRestClient
 
 def escape(val):
     return val.replace("'", "\\'")
@@ -57,6 +58,14 @@ def sms(request):
       keyword = Keyword(word=word)
       keyword.save()
       text.keywords.add(keyword)
+
+   account_sid = "AC0e0571d94d5d6dba4ac914247086bde1"
+   auth_token = "1048a4e4a412d86677011b93d0300995"
+   client = TwilioRestClient(account_sid, auth_token)
+   message = client.messages.create(body="Thanks for your crisis report! Stay safe.",
+       to=sender, from_="+19292274747")
+   print message.sid
+
    return HttpResponse()
 
 def call(request):
