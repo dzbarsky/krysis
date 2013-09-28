@@ -5,5 +5,7 @@ from app import views
 urlpatterns = patterns('',
 
     url(r'^$', views.index, name='index'),
+    url(r'^incomingsms/$', views.sms, name='incomingsms'),
+    url(r'^incomingcall/$', views.call, name='incomingcall'),
 
 )

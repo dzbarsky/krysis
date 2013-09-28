@@ -1,6 +1,12 @@
+<u>tweets!</u><br>
 {% for tweet in tweets %}
-  {{ tweet.sender }}
+  {{ tweet.text }}<br>
+  {{ tweet.sender }}<br>
+  {{ tweet.date }}<br><br>
 {% endfor %}
+<u>texts!</u><br>
 {% for text in texts %}
-  {{ text.sender }}
+  {{ text.text }}<br>
+  {{ text.sender }}<br>
+  {{ text.date }}<br><br>
 {% endfor %}
