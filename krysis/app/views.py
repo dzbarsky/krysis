@@ -62,17 +62,23 @@ def sms(request):
 def call(request):
    return HttpResponse()
 
-def getTexts(request):
-   texts = Text.objects.all()
-   jsonified = serializers.serialize('json', texts)
+def getKeywords(objects):
    words = {}
-   for text in texts:
-       for keyword in text.keywords.all():
+   for obj in objects:
+       for keyword in obj.keywords.all():
           lc = keyword.word.lower() 
           if lc in words:
              words[lc] += 1
           else:
              words[lc] = 1
+   return words
+
+def getTexts(request):
+   texts = Text.objects.all()
+   jsonified = serializers.serialize('json', texts)
+   textwords = getKeywords(texts)
+   tweetwords = getKeywords(Tweet.objects.all())
+   words = dict(textwords, **tweetwords)
    wordjson = json.dumps(words)
    resp = [jsonified, wordjson]
    toreturn = json.dumps(resp)
