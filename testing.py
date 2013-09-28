@@ -31,12 +31,6 @@ executeQuery("create database krysis;")
 os.system("python krysis/manage.py syncdb")
 executeQuery("use krysis")
 
-for sms in client.sms.messages.list():
-    sql = """INSERT INTO app_text(text, sender, date)
-             VALUES('%s', '%s', '%s')
-          """ % (escape(sms.body), sms.to, sms.date_sent)
-    executeQuery(sql)
-
 consumer_key='fVHE2OyTytlxzWiSAvk3w'
 consumer_secret='GwJ6A72AHTIzPpPmHBdVKeEqWrlCxT47xUxLoXaBMWA'
 access_token_key='1912820988-iKkJ27a0XMUISHUo2GGuMAXEurOzBBisHwFV7l5'
@@ -47,8 +41,14 @@ api = twitter.Api(consumer_key=consumer_key,
                   access_token_key=access_token_key,
                   access_token_secret=access_token_secret)
 
+for sms in client.sms.messages.list():
+    sql = """INSERT IGNORE INTO app_text(text, sender, date)
+             VALUES('%s', '%s', '%s')
+          """ % (escape(sms.body), sms.to, sms.date_sent)
+    executeQuery(sql)
+
 for tweet in api.GetMentions():
-    sql = """INSERT INTO app_tweet(text, sender, date)
+    sql = """INSERT IGNORE INTO app_tweet(text, sender, date)
              VALUES('%s', '%s', '%s')
           """ % (escape(tweet.text),
                  escape(tweet.user.name),
