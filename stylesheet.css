@@ -1,0 +1,64 @@
+/*cadetblue1 98F5FF
+palegreen #9AFF9A
+lavender blush 2 #EEE0E5
+thistle #D8BFD8
+lightblue 1 BFEFFF 
+azure 2 E0EEEE
+gray91 E8E8E8 */
+
+/*
+icon blue 5c80cb
+lighter icon blue 8EB2FD
+chiller 98BCFD
+even more chill A2C6FD
+chillest ACD0FD*/
+
+#header{
+	position:absolute;
+	color:#fff;
+	/*font-family:'Quattrocento Sans', sans-serif, bold;*/
+	font-family:'Montserrat', sans-serif,bold;
+	font-size:2em;
+	width:105%;
+	margin-left:50px;
+	line-height:100px;
+	
+}
+
+#map-canvas{
+	visibility:hidden;
+	position:absolute;
+	height:500px;
+	/*width:900px;*/
+	width:101.5%;
+	margin-left:-2%;
+	top:120px;
+}
+
+.tabs{
+	margin-left:50px;
+	top:75px;
+    display: inline-block;  
+    font-family:'Montserrat', sans-serif,bold;
+    cursor: pointer;  
+    position: relative;  
+    font-size: 1em;
+}  
+
+#about,#news,#trend,#map{
+	border-bottom-style:solid;
+    border-bottom-color:#fff;
+    border-width:0px;
+    margin-right:10px;
+}
+
+#about_text,#trend_text,#news_text{
+	position:absolute;
+	margin-left: 50px;
+	top:200px;
+	font-family:'Montserrat', sans-serif,bold;
+	font-size:1em;
+	visibility: hidden;
+}
+
+
