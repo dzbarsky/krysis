@@ -1,0 +1,3 @@
+[submodule "python-twitter"]
+	path = python-twitter
+	url = https://github.com/bear/python-twitter
